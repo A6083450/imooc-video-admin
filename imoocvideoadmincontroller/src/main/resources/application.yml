@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.56.105:3306/imooc-video-dev?useUnicode=true&characterEncoding=utf8
+    druid:
+      min-idle: 1
+      test-on-borrow: true
+      stat-view-servlet:
+        allow: true
+      max-active: 20
+      initial-size: 1
+  http:
+      multipart:
+        max-request-size: 1000MB
+        max-file-size: 100MB
+  thymeleaf:
+    cache: false
+
+#表示所有的访问都经过静态资源路径
+  mvc:
+    static-path-pattern: /**
+#配置静态文件路径
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${save-user-video-path}
+logging:
+  level:
+    com:
+      imooc:
+        mapper: debug
+mybatis:
+  type-aliases-package: com.imooc.pojo
+  mapper-locations: classpath:mapper/*.xml
+mapper:
+  identity: MYSQL
+  not-empty: false
+  mappers: com.imooc.utils.MyMapper
+
+pagehelper:
+  helperDialect: mysql
+  support-methods-arguments: true
+  params: count=countSql
+
+save-user-video-path: E:/imooc-video-dev
+
+
+
+
+

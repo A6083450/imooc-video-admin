@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.mapper.UsersReportMapperCustom" >
+
+  <select id="selectAllVideoReport" resultType="com.imooc.pojo.vo.Reports">
+      SELECT
+          ur.id as id,
+          ur.title as title,
+          ur.content as content,
+          ur.create_date as createDate,
+          du.username as dealUsername,
+          v.id as dealVideoId,
+          v.video_desc as videoDesc,
+          v.video_path as videoPath,
+          v.status as status,
+          u.username as submitUsername
+      FROM users_report ur
+          LEFT JOIN users du ON ur.deal_user_id = du.id
+          LEFT JOIN videos v ON ur.deal_video_id = v.id
+          LEFT JOIN users u ON ur.userid = u.id
+      ORDER BY ur.create_date DESC
+
+  </select>
+</mapper>
